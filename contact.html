@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaT-Loy · Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- 1. FIXED CSS PATH: Stepping out of the MyWebsite folder -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  < NAVBAR >
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="logo">🐾 PaT-Loy</a>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <CONTACT PAGE >
+  <section class="container">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Let's talk</h3>
+        <p>ប្រសិនបើលោកអ្នកមានសំណួរអំពីផលិតផល ការបញ្ជាទិញ ឬការបោះដុំ? លោកអ្នកអាចធ្វើការសាកសួរពត៌មានបាន ពួកយើងរីករាយក្នុងការ ឆ្លើយតបជានិច្ច។</p>
+        <div class="contact-detail">📍 No.185, St369, Chbar Ampov, Phnom Penh</div>
+        <div class="contact-detail">📞 +855 96 786 1471</div>
+        <div class="contact-detail">✉️ hello@PaT-Loy.com</div>
+        <div class="contact-detail">🕒 Mon-Fri: 9am - 5pm</div>
+      </div>
+      <div class="contact-form">
+        <h3>Send us a message</h3>
+        <form id="contactForm">
+          <div class="form-group">
+            <input type="text" placeholder="Your name" required id="contactName">
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email address" required id="contactEmail">
+          </div>
+          <div class="form-group">
+            <textarea rows="4" placeholder="How can we help?"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:16px 0;">Send Message</button>
+        </form>
+        <p id="formFeedback" style="margin-top:16px; font-weight:600; font-size:0.9rem; color:var(--primary);"></p>
+      </div>
+    </div>
+  </section>
+
+  <FOOTER>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>🐾 PaT-Loy</h4>
+          <p>We design premium experiences for your beloved pets. Health, happiness, and wagging tails guaranteed.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html">Shop All Products</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Get in Touch</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Care Guidelines</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Stay in the loop</h4>
+          <p>Subscribe to receive pet care tips, exclusive promo codes, and early access sales.</p>
+          <div class="newsletter-box">
+            <div class="newsletter-form">
+              <input type="email" placeholder="Enter your email...">
+              <button>Join</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 PaT-Loy Premium. All rights reserved.</span>
+        <span>Crafted for your best friends</span>
+      </div>
+    </div>
+  </footer>
+
+ 
+  <script src="../js/script.js"></script>
+  <script>
+    // Contact form
+    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName')?.value.trim();
+      const email = document.getElementById('contactEmail')?.value.trim();
+      if (name && email) {
+        document.getElementById('formFeedback').textContent = `Thanks ${name}! We'll get back to you within 24h.`;
+        this.reset();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaT-Loy · Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="logo">🐾 PaT-Loy</a>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="container">
+    <div class="shop-header">
+      <div>
+        <h1>All Pet Products</h1>
+        <p>Find the perfect match for your best friend</p>
+      </div>
+      <div class="filter-bar">
+        <span></span>
+        <button class="filter-btn active-filter" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="toys">Toys</button>
+        <button class="filter-btn" data-filter="food">Food</button>
+        <button class="filter-btn" data-filter="beds">Beds</button>
+        <button class="filter-btn" data-filter="grooming">Grooming</button>
+        <button class="filter-btn" data-filter="accessories">Accessories</button>
+      </div>
+    </div>
+
+    <div class="shop-toolbar">
+      <div class="shop-controls">
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Sort by: Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+        <span class="product-count" id="productCount">24 products</span>
+      </div>
+      <div class="view-options">
+        <button class="view-btn active-view" data-view="grid" title="Grid view">▦</button>
+        <button class="view-btn" data-view="list" title="List view">☰</button>
+      </div>
+    </div>
+
+    <div class="products-grid" id="shopGrid">
+      </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>🐾 PaT-Loy</h4>
+          <p>We design premium experiences for your beloved pets. Health, happiness, and wagging tails guaranteed.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html">Shop All Products</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Get in Touch</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Care Guidelines</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Stay in the loop</h4>
+          <p>Subscribe to receive pet care tips, exclusive promo codes, and early access sales.</p>
+          <div class="newsletter-box">
+            <div class="newsletter-form">
+              <input type="email" placeholder="Enter your email...">
+              <button>Join</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 PaT-Loy Premium. All rights reserved.</span>
+        <span>Crafted for your best friends</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script>
+    // Shop page - init with URL filter param
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterParam = urlParams.get('filter');
+    let initialFilter = filterParam || 'all';
+    
+    // Set active filter button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active-filter', btn.dataset.filter === initialFilter);
+    });
+    
+    renderProducts(initialFilter, 'default');
+    bindCartEvents();
+    
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-filter'));
+        this.classList.add('active-filter');
+        const filter = this.dataset.filter;
+        renderProducts(filter, document.getElementById('sortSelect').value);
+        // Update URL without reload
+        const url = new URL(window.location);
+        url.searchParams.set('filter', filter);
+        window.history.pushState({}, '', url);
+      });
+    });
+    
+    // Sort
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      const filter = document.querySelector('.filter-btn.active-filter').dataset.filter;
+      renderProducts(filter, this.value);
+    });
+    
+    // View toggle
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active-view'));
+        this.classList.add('active-view');
+        currentView = this.dataset.view;
+        const filter = document.querySelector('.filter-btn.active-filter').dataset.filter;
+        renderProducts(filter, document.getElementById('sortSelect').value);
+      });
+    });
+  </script>
+</body>
+</html>
